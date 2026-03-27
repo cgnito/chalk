@@ -1,15 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from app.config import cors_allow_origins
+from app.request_util import public_base_url
 from app.database import create_db_and_tables
 from app.api import router as school_api_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Chalk API")
 
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000", 
-    "http://localhost:8000",
-]
+origins = cors_allow_origins()
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,5 +26,8 @@ def start_up():
 app.include_router(school_api_router)
 
 @app.get("/")
-def root():
-    return {"message": "Welcome to Chalk API"}
+def root(request: Request):
+    return {
+        "message": "Welcome to Chalk API",
+        "server_base_url": public_base_url(request) or None,
+    }
