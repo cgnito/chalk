@@ -95,7 +95,3 @@ frontend (`frontend/.env.local`):
 
 - `NEXT_PUBLIC_API_URL` — backend origin, no trailing slash
 - `NEXT_PUBLIC_ISW_CHECKOUT_SCRIPT` — optional override for the inline script url
-
-**judges and submission hygiene**
-
-before tagging a release, remove leftover debug logging, ensure `.env` files stay out of git, and use a clear initial commit or short history describing `feat: chalk monorepo for enyata x interswitch buildathon` so repository structure and dates are easy to review.
